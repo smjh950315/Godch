@@ -1,0 +1,28 @@
+﻿.wnd {
+    overflow-y: auto;
+    position: absolute;
+}
+.wnd-title {
+    text-align: left;
+    border: hidden;
+    font-weight: 700;
+    color: white;
+    cursor: move;
+}
+.wnd-body {
+    top: 50px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    border: hidden;
+    position: absolute;
+    background: transparent;
+    margin: auto;
+}
+#display-area {
+    top: 0px;
+    left: 0px;
+    width: 1600px;
+    height: 1200px;
+    z-index: -1;
+}

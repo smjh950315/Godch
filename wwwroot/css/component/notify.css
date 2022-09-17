@@ -1,0 +1,27 @@
+﻿
+.notify-msg {
+    max-width: 100px;
+    overflow: hidden;
+    display: block;
+}
+
+.notify-spot {
+    position: relative;
+    transform: translate(0%,0%);
+    margin-left: 0;
+    margin-right: auto;
+}
+
+#chat-list {
+    max-width: 160px !important;
+    white-space: nowrap;
+}
+
+.dropdown-chat-notify-spot {
+    position: absolute;
+    left: 130px;
+}
+
+.dropdown-accordion-body{
+    padding:0px!important;
+}

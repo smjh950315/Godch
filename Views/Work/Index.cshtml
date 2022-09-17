@@ -1,0 +1,83 @@
+﻿@model Godch.ViewModels.dWork
+@{
+    ViewBag.Title = Model.WorkName;
+}
+<h2>@Model.WorkName by @Model.AuthorName</h2>
+<div class="work-details">
+    <div class="work-detail-img-box">
+        <img class="img-fluid d-block mx-auto" src='/_GodchData/Works/@Model.FileUrl' />
+    </div>
+
+    <div class="work-detail-text-box">
+        <div id="workId" style="visibility:hidden; width:0; height:0;">@Model.Id</div>
+        <div>
+            Work Name : @Model.WorkName
+        </div>
+        <div>
+            Author :
+            <a href="/User/Index?uid=@Model.AuthorId">@Model.AuthorName</a>
+            <div>
+                Uploaded : @Model.UpLoadTime
+         </div>
+        </div>
+        <div>
+            <div style="width:fit-content; display:inline-block;">
+                Tag:
+            </div>
+            <div id="related-tags">
+            </div>
+            <div id="btn-add-tag" class="btn-base">
+                +
+            </div>
+        </div>
+@*        <div>
+            <div>
+                <div class="col" style="display:contents;">Comment:</div>
+                <input class="col" id="comment-input" type="text" />
+                <div id="send-comment" class="btn-base col">Send</div>
+                <div id="show-comment" class="btn-base col">Show</div>
+            </div>
+            <div id="comment-list">                
+            </div>
+        </div>*@
+    </div>
+</div>
+<div class="modal fade" id="tag-modal-window" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:330px;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="tag-modal-title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body mb-3" id="tag-modal-content" style="width:310px; align-content:center;">
+                <div>
+                    <input type="text" id="tag-create-input" style="width:200px;" />
+                    <a id="btn-create-tag" class="btn-base">create</a>
+                </div>                
+                <div id="all-tag-list" class="mt-3" style="width:100%;height:200px; overflow:scroll;"> 
+                </div>                
+            </div>
+            <div id="tag-modal-footer" class="modal-footer">
+                <button id="tag-close-btn" type="button" class="btn-base" data-bs-dismiss="modal">Close</button>
+                <button id="tag-save-btn" type="button" class="btn-base">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        this.addEventListener('click', function (event) {
+            workClickEvent(event);
+        });
+    });
+    $(function(){
+        document.getElementById('tag-create-input').addEventListener('change',function(){
+            searchFilter();
+        });
+    });
+    $(function(){
+        window.addEventListener('load',function(){
+            LoadTagList();
+        })
+    });
+</script>

@@ -1,0 +1,97 @@
+﻿@model dynamic
+@using IO = Godch.PostFileIO;
+@{
+    dbQuery q = new();
+    var Page = ViewBag.Page;
+    var Title = ViewBag.Title;
+    var PostId = ViewBag.PostId;
+    var ForumId = ViewBag.ForumId;
+}
+<h2 id="post-family-title">@Title</h2>
+
+@foreach (var item in Model)
+{
+    <div class="post-content row" style="color:white">
+        <div class="post-header">@ViewBag.PostTitle</div>
+        <div class="row align-content-center post-body">
+            <div class="user-table col-3">
+                <div class="user-head ">
+                    <img class="img-fluid" src="/_GodchData/UserData/@item.AuthorId/photo.jpg" />
+                </div>
+                <div class="user-info text-center">
+                    @q.UserName(item.AuthorId)
+                </div>
+            </div>
+            <div class="text-content col-9">
+                @Html.Raw($"<pre class='in-content-text' id=post_text_content_{item.PostId}>" + IO.ReadPostContent(item.PostId) + "</pre>")
+            </div>
+        </div>
+        <div class="row post-footer">
+            <div class="col">
+                <a class="btn-base btn-post-footer" id="back_to_forum_from_@item.PostId" href="/Post/Return">
+                    <div class="in-button-text">
+                        Back
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <div class="col middle-in-block">
+                    @Html.Raw("<pre class='post-last-edit'> Last edit : " + IO.LastModified(item.PostId) + "</pre>")
+                </div>
+            </div>
+            <div class="col row w-fc justify-content-end">
+                @if (item.AuthorId == ViewBag.CurrentUserID && item.AuthorId != 0)
+                {
+
+                    <a class="btn-base btn-post-footer" id="psot_Edit_@item.PostId">
+                        Edit
+                    </a>
+                }
+                else
+                {
+                    <a class="btn-base btn-post-footer" id="psot_Edit_@item.PostId" style="visibility:hidden!important;" href="/Post/Edit?pid=@item.PostId">
+                        <div class="in-button-text">
+                        </div>
+                    </a>
+                }
+                <a class="btn-base btn-post-footer" id="psot_Reply_@item.PostId">
+                    Reply
+                </a>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="justify-content-xxl-center">
+    @if (Page.Now != 1)
+    {
+        <a class="btn page-btn-link" href="/Post/Index?pid=@PostId&page=@Page.Prev">
+            Prev
+        </a>
+    }
+    @for (int i = 1; i <= Page.Max; i++)
+    {
+        if (i == Page.Now)
+        {
+            <a class="btn page-btn-link btn-page-now" href="/Post/Index?pid=@PostId&page=@i"> @i</a>
+        }
+        else
+        {
+            <a class="btn page-btn-link" href="/Post/Index?pid=@PostId&page=@i"> @i</a>
+        }
+    }
+    @if (Page.Now != Page.Max)
+    {
+        <a class="btn page-btn-link" href="/Post/Index?pid=@PostId&page=@Page.Next">
+            Next
+        </a>
+    }
+</div>
+
+<script>
+    $(function () {
+        this.addEventListener('click', function (event) {
+            forumClickEvent(event);
+        });
+    });
+</script>

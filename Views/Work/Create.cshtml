@@ -1,0 +1,49 @@
+﻿@model Godch.ViewModels.uWork
+
+<h2>WorkUpLoad</h2>
+
+@using (Html.BeginForm("Upload", "Work", FormMethod.Post, new {enctype="multipart/form-data"}))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+
+        <div class="form-group">
+            Work Name
+            <div class="col-md-10">
+                <input id="WorkName" name="WorkName" type="text" />
+            </div>
+        </div>
+        <div class="form-group">
+            Work Description
+            <div class="col-md-10">
+                <input id="WorkName" name="Description" type="text" />
+            </div>
+        </div>
+        <input id="WFile" name="WorkFile" type="file" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <img id="img-preview" style="max-width:800px; max-height:800px;" class="img-fluid" type="file" />
+            </div>
+        </div>
+        <input type="submit" value="WorkUpLoad" class="btn btn-base" />
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Works", "Home")
+</div>
+<script>
+    $('#WFile').change(()=>{
+        let FR=new FileReader();
+        let file=document.getElementById('WFile').files[0];
+        FR.readAsDataURL(file);
+        FR.onload = function (event){
+            let src = event.target.result;
+            $('#img-preview').attr('src',src);
+        }
+    });
+</script>
+
+

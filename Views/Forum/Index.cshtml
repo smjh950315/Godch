@@ -1,0 +1,70 @@
+﻿@model dynamic
+@using MyLib;
+@{
+    ViewBag.Title = ViewBag.ForumName;
+    var Page = ViewBag.Page;
+    var ForumId = ViewBag.ForumId;
+    var ForumName = ViewBag.ForumName;
+}
+<h2 id="forum-name">@ViewBag.ForumName</h2>
+<div id="forum-id" style="visibility:hidden!important; height:0!important;">@ForumId</div>
+<p>
+    <a id="btn-new-post" class="btn-base">
+        New post
+    </a>
+</p>
+<div id="post_header">
+    <div class="row">
+        <div class="col-sm-3">Title</div>
+        <div class="col-sm-3">Author</div>
+        <div class="col-sm-3">Posted</div>
+        <div class="col-sm-3">Last Replied</div>
+    </div>
+</div>
+<div id="post_list" class="row forum-list">
+    @foreach (var item in Model)
+    {
+        <a class="forum-list-content" id="Post_@item.PostId" href="/Post/Index?pid=@item.PostId">
+            <div class="row">
+                <div class="col-sm-3">@item.Title</div>
+                <div class="col-sm-3">@FrontEndHelper.UserName(item.AuthorId)</div>
+                <div class="col-sm-3">@Time.ToString(item.Create)</div>
+                <div class="col-sm-3">@Time.ToString(item.LastReply)</div>
+            </div>
+        </a>
+    }
+</div>
+<div>
+    @Html.ActionLink("Back to Forum List", "Forums", "Home")
+</div>
+
+<div class="justify-content-xxl-center">
+    @if (Page.Now != 1)
+    {
+        <a class="btn page-btn-link" href="/Forum/Index?fid=@ForumId&page=@Page.Prev">
+            Prev
+        </a>
+    }
+    @for (int i = 1; i <= Page.Max; i++)
+    {
+        if(i == Page.Now){
+            <a class="btn page-btn-link btn-page-now" href="/Forum/Index?fid=@ForumId&page=@i"> @i</a>
+        }
+        else{
+            <a class="btn page-btn-link" href="/Forum/Index?fid=@ForumId&page=@i"> @i</a>
+        }
+    }
+    @if (Page.Now != Page.Max)
+    {
+        <a class="btn page-btn-link" href="/Forum/Index?fid=@ForumId&page=@Page.Next">
+            Next
+        </a>
+    }
+</div>
+<script>
+    $(function () {
+        this.addEventListener('click', function (event) {
+            forumClickEvent(event);
+        });
+    });
+</script>

@@ -1,0 +1,306 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Godch</title>
+    <script src="~/js/build-in.bundle.js"></script>
+    <script src="~/js/lib/component.js"></script>
+    <script src="~/js/scripts.js"></script>
+    <script src="~/js/hub.js"></script>
+    <link id="css" rel="stylesheet" href="/HtmlWnd.css">
+    <link href="~/css/style.css" rel="stylesheet" />
+
+    @if (User.Identity != null && User.Identity.IsAuthenticated)
+    {
+        int uid = Convert.ToInt32(User.Identity.Name);
+        UISettings ui = AccountHelper.ReadUI(uid);
+        <style id="custom-ui">
+            :root{
+                --theme-bg-color: @ui.BgColor;
+                --theme-text-color:@ui.TextColor;
+                --theme-font: @ui.Font;
+            }
+        </style>
+    }
+    <style>
+        .color-adj {
+            margin: 0;
+            padding: 0;
+            width: 50px;
+            height: 25px;
+        }
+    </style>
+</head>
+<body class="font-theme">
+    <div id="connection-state" style="height:0; visibility:hidden">disConnected</div>
+    <div style="min-height:100vh;">
+        <!--Navbar-->
+        <nav class="navbar navbar-expand-lg custom-navbar">
+            <div class="container-fluid container">
+                <!--Navbar Mark-->
+                <a class="navbar-brand-left" href="/">
+                    <span class="nav-bar-text">GODCH</span>
+                </a>
+                <!--Navbar Search-->
+                <div class="navbar-middle" style="">
+                    <div class="d-flex justify-content-center">
+                        <input id="input-nav-search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <select id="search-option-list" style="margin-right:0.5em;">
+                            <option id="nav-not-selected" class="nav-search-option">
+                                None
+                            </option>
+                            <option id="nav-search-work" class="nav-search-option">
+                                Work
+                            </option>
+                            <option id="nav-search-post" class="nav-search-option">
+                                Post
+                            </option>
+                            <option id="nav-search-forum" class="nav-search-option">
+                                Forum
+                            </option>
+                        </select>
+                        <button id="btn-nav-search" class="btn btn-outline-success">Search</button>
+                    </div>
+                </div>
+                <!--Navbar User option-->
+                <div id="user-option">
+                    @if (User.Identity != null && User.Identity.IsAuthenticated)
+                    {
+                        int uid = Convert.ToInt32(User.Identity.Name);
+                        <div id="user-now" style="height:0; visibility:hidden;">@uid</div>
+                        var userNow = FrontEndHelper.GetUser(uid);
+                        if (userNow != null)
+                        {
+                            <div id="all-notify" class="btn-group">
+                                <button class="btn btn-primary navbar-btn dropdown-toggle" onclick="NotifyRead()" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
+                                    Notify
+                                    <span id="pill-nav-notify-unread" class="badge rounded-pill bg-danger notify-spot"></span>
+                                </button>
+                                <ul id="notify-list" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <li><a id="btn-load-old-notify" class="inDropdownTriggerLink">Old notify</a></li>
+                                </ul>
+                            </div>
+
+                            <div id="show-chat-list" class="btn-group">
+                                <button id="nav-chat-dropdown-btn" class="btn btn-primary navbar-btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="true">
+                                    Msgs
+                                    <span id="pill-nav-msg-unread" class="badge rounded-pill bg-danger notify-spot"></span>
+                                </button>
+                                <ul id="chat-list" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <li class="chatListItem navbar-dropdown-list-option" style="position:absolute; height:0!important; visibility:hidden"><div id="LoadGroupBtn">Load</div></li>
+                                </ul>
+                            </div>
+
+                            <div id="acc-dropdown-group" class="btn-group">
+                                <a id="nav-acc-dropdown-btn" class="btn btn-primary navbar-box dropdown-toggle" title="@userNow.Name" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="false">
+                                    <img class="img-fluid" src='@userNow.Photo' />
+                                    <span id="pill-nav-msg-unread" class="badge rounded-pill bg-danger notify-spot"></span>
+                                </a>
+                                <ul id="nav-acc-dropdowm-list" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <li class="navbar-dropdown-list-option">
+                                        <div class="accordion accordion-flush inDropdownAccordionTriggerLink" id="account-accordion">
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header">
+                                                    <button class="inDropdownTriggerLink accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#account-options">
+                                                        <div>
+                                                            Profile
+                                                        </div>
+                                                        <div>
+                                                            [@userNow.Name]
+                                                        </div>
+                                                    </button>
+                                                </h2>
+                                                <div id="account-options" class="accordion-collapse collapse" data-bs-parent="#account-accordion">
+                                                    <div class="dropdown-accordion-body accordion-body">
+                                                        <a class="navbar-dropdown-list-option inDropdownTriggerLink" href='/Account'>Edit</a>
+                                                        <a class="navbar-dropdown-list-option inDropdownTriggerLink" href='/User'>View</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion accordion-flush inDropdownAccordionTriggerLink" id="custom-settings-accordion">
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header">
+                                                    <button class="inDropdownTriggerLink accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#custom-options">
+                                                        <div>
+                                                            Custom
+                                                        </div>
+                                                    </button>
+                                                </h2>
+                                                <div id="custom-options" class="accordion-collapse collapse" data-bs-parent="#custom-settings-accordion">
+                                                    <div class="dropdown-accordion-body accordion-body">
+                                                        <a class="navbar-dropdown-list-option inDropdownTriggerLink" onclick="createUiWnd()">UiSettings</a>
+                                                        <a class="navbar-dropdown-list-option inDropdownTriggerLink" id="nav-user-tag-modify">Tags</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <a class="btn navbar-btn" href="/Account/Logout">Logout</a>
+                        }
+                    }
+                    else
+                    {
+                        <div class="nav-bar-text">Guest</div>
+                        <a class="btn" id="myframe" data-bs-toggle="modal" data-bs-target="#LoginModal">Login</a>
+                        <div class="modal fade" id="LoginModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content" style="padding: 0.5rem; max-width:350px; margin:auto">
+                                    <div class="modal-header">
+                                        <div class="modal-title">Login</div>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+                                    </div>
+                                    <div class="modal-body" style="height:200px">
+                                        <iframe class="container position-absolute top-50 start-50 translate-middle" id="login-box" src="/Account/Login"></iframe>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </nav>
+        <button id="chatModalBtn" type="button" style="visibility:hidden!important; max-height:0px!important;" data-bs-toggle="modal" data-bs-target="#chatNodal">
+            Chat
+        </button>
+        <div class="modal fade" id="chatNodal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="chatGroupTitle"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="chatModalBody">
+
+                        <div class="d-flex align-items-start">
+                            <div class="nav flex-column nav-pills me-3" id="chat-modal-tab" role="tablist" aria-orientation="vertical">
+                                <button class="nav-link chatModalNavBtn active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button">Home</button>
+                            </div>
+                            <div class="tab-content" id="chat-modal-tabContent">
+                                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container body-content" style="padding-top:30px; padding-bottom:120px;">
+            @RenderBody()
+            @RenderSection("scripts", false)
+        </div>
+    </div>
+    <button id="modifyModal" style="visibility:hidden!important; height:0!important;" type="button" data-bs-toggle="modal" data-bs-target="#modify-window"></button>
+    <div class="modal fade" id="modify-window" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-title"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body mb-3" id="modify-content" style="width:80%; align-content:center;">
+                </div>
+                <div id="acc-modal-footer" class="modal-footer">
+                    <button id="close-btn" type="button" class="btn-base" data-bs-dismiss="modal">Close</button>
+                    <button id="save-btn" type="button" class="btn-base" >Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="upload-modal-window" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="upload-modal-title"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body mb-3" id="upload-modal-content" style="width:80%; align-content:center;">
+                    <input type="file" />
+                </div>
+                <div id="upload-modal-footer" class="upload-modal-footer">
+                    <button id="upload-close-btn" type="button" class="btn-base" data-bs-dismiss="modal">Close</button>
+                    <button id="upload-save-btn" type="button" class="btn-base">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button id="btnNavTagModifyModal" style="visibility:hidden!important; height:0!important;" type="button" data-bs-toggle="modal" data-bs-target="#nav-tag-modal-window"></button>
+    <div class="modal fade" id="nav-tag-modal-window" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width:330px;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="nav-tag-modal-title"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body mb-3" id="nav-tag-modal-content" style="width:310px; align-content:center;">
+                    <div>
+                        <input type="text" id="nav-tag-create-input" style="width:200px;" />
+                        <a id="nav-btn-create-tag" class="btn-base">create</a>
+                    </div>
+                    <div id="nav-all-tag-list" class="mt-3" style="width:100%;height:200px; overflow:scroll;">
+                    </div>
+                </div>
+                <div id="nav-tag-modal-footer" class="modal-footer">
+                    <button id="nav-tag-close-btn" type="button" class="btn-base" data-bs-dismiss="modal">Close</button>
+                    <button id="nav-tag-save-btn" type="button" class="btn-base">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button id="btnNavSearchModal" style="visibility:hidden!important; height:0!important;" type="button" data-bs-toggle="modal" data-bs-target="#nav-search-modal"></button>
+    <div class="modal fade" id="nav-search-modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="nav-search-modal-title"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body mb-3" id="nav-search-result" style="width:100%; align-content:center;">
+                </div>
+                <div id="nav-search--modal-footer" class="modal-footer">
+                    <button id="nav-search-close-btn" type="button" class="btn-base" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="area-wnd-display" style="padding:-1920px;position:absolute;top:0;left:0;"></div>
+    <footer class="container body-content" style="position:relative; margin-top:-120px;">
+        <hr />
+        <p class="mt-4">&copy; @DateTime.Now.Year - GODCH</p>
+    </footer>
+    <script>
+        var godchApi = '@Config.GodchApi';
+        $(function () {
+            getConnectionState();
+            function recieveFrameMsg(event) {
+                let targetId = targetOfDocMsg(event);
+                if (targetId == 'main-notify' || targetId == 'loginItems') {
+                    recieveDocMsg(event);
+                }
+            }
+            window.addEventListener("message", recieveFrameMsg, false);
+        });
+        $(function () {            
+            addEventListener('click', function (event) {
+                navbarClickEvent(event);
+            });
+        });
+        $(function () {
+            document.getElementById('nav-tag-create-input').addEventListener('change', function () {
+                navTagSearchFilter();
+            });
+        });
+    </script>
+</body>
+</html>

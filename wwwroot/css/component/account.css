@@ -1,0 +1,46 @@
+﻿#profile > div> div > div {
+    width: 30%;
+    text-align: center;
+    display: inline-block;
+}
+
+    #profile > div > div > div:first-child + div {
+        width: 30%;
+        text-align: left;
+    }
+
+#modify-content {
+    width: 80%;
+    align-self: center;
+}
+
+#in-friend-tab-content>div{
+    margin:0;
+}
+
+.user-img-box {
+    width:auto;
+    max-width: 275px;
+    height: auto;
+    max-height:275px;
+    margin: auto;
+    display: inline-block;
+    justify-items: center;
+    border: var(--theme-view-box-border);
+    border-radius: 2px;
+    padding: 2px;
+    box-shadow: 0px 0px 3px #000000,inset 0px 0px 3px #000000;
+}
+    .user-img-box:hover {
+        border: 1px solid rgba(127,127,127,1);
+        border-radius: 2px;
+        
+    }
+
+.user-img-box >img{
+    width: auto;
+    max-width: 250px;
+    height: auto;
+    max-height: 250px;
+    vertical-align:bottom!important;
+}

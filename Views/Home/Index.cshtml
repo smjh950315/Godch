@@ -1,0 +1,86 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@{
+    var wlist = ViewBag.wList;
+    var fwlist = ViewBag.fwList;
+}
+<h2>Index</h2>
+<p>
+    @Html.ActionLink("Works", "Works")
+    @Html.ActionLink("Forums", "Forums")
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a href="/Account">My Account</a>
+    }
+    else
+    {
+        <a href="/Account/Create">Create a new account</a>
+    }
+</p>
+<div id="latest-news" class="row">
+    <div id="work-list" class="row index-work-view">
+        <div>Works from your tags</div>
+        @{
+            int i = 0;
+            foreach (var w in wlist)
+            {
+                <a class="view-box" id="w_@w.Id" href="/Work/Index?wid=@w.Id">
+                    <div class="img-box">
+                        <img class="main-img" src='/_GodchData/Works/@w.FileUrl' />
+                    </div>
+                    <div class="about-work">
+                        <div class="workName row">
+                            <div class="col">@w.WorkName</div>
+                            <div class="col"></div>
+                            <div class="col-auto">by @w.AuthorName</div>
+                        </div>
+
+                        <div class="work-details row">
+                            <div class="col"></div>
+                            <div class="col">@w.Description</div>
+                            <div class="col"></div>
+                        </div>
+                    </div>
+                </a>           
+            }
+        }
+    </div>
+    <div id="work-list" class="row index-work-view">
+    <div>Works from following users</div>
+        @{
+            int j = 0;
+            foreach (var w in fwlist)
+            {
+                <a class="view-box" id="w_@w.Id" href="/Work/Index?wid=@w.Id">
+                    <div class="img-box">
+                        <img class="main-img" src='/_GodchData/Works/@w.FileUrl' />
+                    </div>
+                    <div class="about-work">
+                        <div class="workName row">
+                            <div class="col">@w.WorkName</div>
+                            <div class="col"></div>
+                            <div class="col-auto">by @w.AuthorName</div>
+                        </div>
+
+                        <div class="work-details row">
+                            <div class="col"></div>
+                            <div class="col">@w.Description</div>
+                            <div class="col"></div>
+                        </div>
+                    </div>
+                </a>
+            }
+        }
+
+    </div>
+</div>
+<script>
+    $(function a() {
+        var s = toJson('123', '456', '789');
+        postRequest('@Config.GodchApi' + 'get/js', s);
+    })
+</script>
+
+
+

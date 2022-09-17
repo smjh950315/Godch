@@ -1,0 +1,178 @@
+﻿#forum-list-header {
+    background-color: var(--theme-in-list-bg-color);
+    border: var(--theme-in-list-item-border);
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+}
+
+#forum-list {
+    margin-top: 1%;
+    padding: 1%;
+    padding-left: 0;
+    padding-right: 0;
+    border-radius: 1%;
+    border: 0px solid #505050;
+}
+
+.forum-list-content {
+    width: 100%;
+    height: 50px;
+    display: inline-block;
+    margin: 0;
+    border-radius: 1%;
+    border: var(--theme-in-list-item-border);
+    background-color: var(--theme-in-list-bg-color);
+    box-shadow: 0px 0px 1px #ffffff,inset 0px 0px 1px #ffffff;
+    text-shadow: 0px 0px 0px #ffffff;
+    font-family: Consolas
+}
+
+    .forum-list-content:hover {
+        background-image: linear-gradient(to right,#DCDCDC50,#DCDCDCDC,#DCDCDC50);
+        box-shadow: 0px 0px 1px #ffffff,inset 0px 0px 1px #ffffff;
+    }
+
+    .forum-list-content > div:only-child {
+        position: relative;
+        top: 50%;
+        transform: translate(0%,-50%);
+        text-align: center;
+        vertical-align: middle;
+        font-family: Consolas;
+        color: var(--theme-text-color);
+    }
+
+.forum-name {
+    text-align: center;
+}
+
+
+#post_header > div:only-child {
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+    background-color: rgba(255,132,255,0.5);
+}
+
+#post_list {
+}
+
+.post {
+    width: 99%;
+    height: 50px;
+    display: inline-block;
+    margin: 1%;
+    padding: 1%;
+    border-radius: 1%;
+    border: 1px solid #505050;
+    background-color: rgba(100,132,255,0.5);
+    box-shadow: 0px 0px 1px #ffffff,inset 0px 0px 1px #ffffff;
+    color: #ffffff;
+    text-shadow: 0px 0px 0px #ffffff;
+    font-family: Consolas;
+    white-space: nowrap;
+}
+
+    .post > div:only-child {
+        text-align: center;
+        font-family: Consolas;
+        color: #ffffff;
+    }
+
+    .post > div:first-child > div:first-child {
+        text-align: left;
+    }
+
+
+
+
+
+
+
+
+.post-content {
+    background-color: var(--theme-in-list-bg-color);
+    color: var(--theme-text-color);
+    min-height: 200px;
+    width: 100%;
+    display: inline-block;
+    margin: 1%;
+    border-radius: 1%;
+    border: var(--theme-in-list-item-border);
+    font-family: var(--theme-font);
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+    .post-content > .post-header {
+        height: 30px;
+        width: 100%;
+    }
+
+    .post-content > .post-body {
+        position: relative;
+        margin: auto;
+    }
+
+        .post-content > .post-body > .user-table {
+            height: 100%;
+            min-height: 240px;
+            border-radius: 1%;
+            border: var(--theme-in-list-item-border);
+            text-align:center;
+        }
+
+            .post-content > .post-body > .user-table > .user-head {
+                display: inline-flex;
+                width:120px;
+                height: 120px;
+                border-radius: 1%;
+                border: var(--theme-in-list-item-border);
+            }
+
+                .post-content > .post-body > .user-table > .user-head > img {
+                    position: relative;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%,-50%);
+                    max-width: -webkit-fill-available;
+                    max-height: -webkit-fill-available;
+                    height:auto;
+                }
+
+            .post-content > .post-body > .user-table > .user-info {
+                color: black;
+                position: static;
+                top: 50%;
+                height: 49%;
+            }
+
+        .post-content > .post-body > .text-content {
+            min-height: 160px;
+            display: inline-block;
+            border-radius: 1%;
+            border: var(--theme-in-list-item-border);
+            font-family: Consolas;
+            padding-left: 1em;
+            padding-right: 1em;
+        }
+
+            .post-content > .post-body > .text-content > .in-content-text {
+                font-weight: 700;
+                color: var(--theme-text-color);
+            }
+
+    .post-content > .post-footer {
+        height: fit-content;
+        width: 100%;
+        margin-left: 0px;
+    }
+
+
+.post-last-edit {
+    margin: auto !important;
+    font-weight: 700;
+    color: var(--theme-text-color);
+    text-align: right;
+}

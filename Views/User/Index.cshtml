@@ -1,0 +1,115 @@
+﻿@model Godch.ViewModels.dUser
+@{ ViewBag.Title = Model.Name; }
+
+<h2>About @Model.Name</h2>
+<div>
+    <hr />
+    <div class="card">
+        <div class="card-header">
+            @Model.Name (Account: @Model.Account)
+        </div>
+        <div class="card-body row">
+            <div class="col">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Contact)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Contact)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.SelfIntroduction)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.SelfIntroduction)
+                    </dd>
+                </dl>
+                <div class="container-fluid">
+                    <div>
+                        Friends:
+                        <div>
+                            @if (Model.Friends.Count == 0)
+                            {
+                                <div>這是一位可憐邊緣人</div>
+                            }
+                            else
+                            {
+                                foreach (var Friend in Model.Friends)
+                                {
+                                    <a class="img-view-box-base" style="width:75px;height:75px;" data-bs-toggle="tooltip" data-bs-placement="right" title="@Friend.Name" href="/User/Index?uid=@Friend.Id">
+                                        <img class="img-fluid h-75px" src='@Friend.Photo' />
+                                    </a>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div>
+                        Followers:
+                        <div>
+                            @if (Model.Followers.Count == 0)
+                            {
+                                <div>這是一位可憐邊緣人</div>
+                            }
+                            else
+                            {
+                                foreach (var Follower in Model.Followers)
+                                {
+                                    <a class="img-view-box-base" style="width:75px;height:75px;" data-bs-toggle="tooltip" data-bs-placement="right" title="@Follower.Name" href="/User/Index?uid=@Follower.Id">
+                                        <img class="img-fluid h-75px" src='@Follower.Photo' />
+                                    </a>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col text-center align-items-center">
+                <div style="position:relative; top:50%; transform:translate(0%,-50%);">
+                    <img class="img-fluid" src="@Model.Photo" />
+                </div>                
+            </div>
+        </div>
+        <div class="card-footer border-light">
+
+            @if (ViewBag.State == "IsSelf")
+            {
+                <a class="btn-base" href="/Account/Index">Edit</a>
+            }
+            else if (ViewBag.State == "Unrequest")
+            {
+                <a class="btn-base" href="/User/AddFriend?uid=@Model.Id">Unrequest...</a>
+            }
+            else if (ViewBag.State == "FriendAllow")
+            {
+                <a class="btn-base" href="/User/AddFriend?uid=@Model.Id">將他自邊緣中拯救出來</a>
+            }
+            else if (ViewBag.State == "Waiting")
+            {
+                <a class="btn-base" href="/User/DeleteFriend?uid=@Model.Id">Waiting for reply...</a>
+            }
+            else if (ViewBag.State == "IsFriend")
+            {
+                <div>已經是好基友</div>
+                <a class="btn-base" href="/User/DeleteFriend?uid=@Model.Id">斷絕往來...</a>
+            }
+            else { }
+            @if(ViewBag.State2 == "IsFollowing"){
+                <a class="btn-base" href="/User/UnFollow?uid=@Model.Id">取消關注</a>
+            }
+            else if(ViewBag.State2 == "FollowAllow"){
+                <a class="btn-base" href="/User/Follow?uid=@Model.Id">關注</a>
+            }
+            else{
+
+            }
+            <a id="chat_invite_@Model.Id" class="btn-base">
+                Start chat
+            </a>
+        </div>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

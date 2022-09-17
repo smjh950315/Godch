@@ -1,0 +1,56 @@
+﻿@model Godch.ViewModels.ViewList
+@{
+    ViewBag.Title = "Works";
+}
+<h2>Works</h2>
+<div>
+    @if (User.Identity != null && User.Identity.IsAuthenticated){
+        <a class="btn-base mb-2" href="/Work/Create">Upload</a>
+        <form class="d-flex justify-content-center mb-2">
+            <input class="form-control me-2" id="search-text-input" type="search" placeholder="Search" aria-label="Search">
+            <select id="search-option-list" style="margin-right:0.5em;">
+                <option id="not-selected" class="search-option">
+                    None
+                </option>
+                <option id="byTag" class="search-option">
+                    Tag
+                </option>
+                <option id="byTitle" class="search-option">
+                    Title
+                </option>
+                <option id="byAuthor" class="search-option">
+                    Author
+                </option>
+            </select>
+            @*<button class="btn btn-outline-success" type="submit">Search</button>*@
+        </form>
+    }
+    <script>
+        $(function(){
+                getSearchOptions();
+        })
+    </script>
+</div>
+<div id="work-list" class="row">
+    @foreach (var item in Model.Values)
+    {
+        <a class="view-box" id="w_@item.Id" href="/Work/Index?wid=@item.Id">
+            <div class="img-box">
+                <img class="main-img" src='/_GodchData/Works/@item.FileUrl' />
+            </div>
+            <div class="about-work">
+                <div class="workName row">
+                    <div class="col">@item.WorkName</div>
+                    <div class="col"></div>
+                    <div class="col-auto">by @item.AuthorName</div>
+                </div>
+
+                <div class="work-details row">
+                    <div class="col"></div>
+                    <div class="col">@item.Description</div>
+                    <div class="col"></div>
+                </div>
+            </div>
+        </a>
+    }
+</div>

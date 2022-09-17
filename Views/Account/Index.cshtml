@@ -1,0 +1,97 @@
+﻿@model Godch.Models.User
+@{
+    ViewBag.Title = "Account";
+}
+<h2 id="welcome-title">Welcome! @Model.UserName</h2>
+<div id="show-acc-email">account : @Model.Account (@Model.EmailAddress)</div>
+<div class="border-base">
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button">Profile</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" id="friend-tab" data-bs-toggle="tab" data-bs-target="#friend" type="button">Friend</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" id="follower-tab" data-bs-toggle="tab" data-bs-target="#follower" type="button">Follower</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" id="following-tab" data-bs-toggle="tab" data-bs-target="#following" type="button">Following</button>
+        </li>
+    </ul>
+    <div class="tab-content nav-tab-content border-nav-content">
+        <div class="tab-pane fade show active" id="profile">
+            <div class="col-8" id="profile-text-content" style="display:inline-block">
+                <div class="mt-3 mb-3">
+                    <div>Account</div>
+                    <div>@Model.Account</div>
+                </div>
+                <div class="mt-3 mb-3">
+                    <div>Full name</div>
+                    <div>@Model.FullName</div>
+                </div>
+                <div class="mt-3 mb-3">
+                    <div>Nick name</div>
+                    <div id="show-nick-name">@Model.UserName</div>
+                    <button id="change-nick-name" class="btn-base">Modify</button>
+                </div>
+                <div class="mt-3 mb-3">
+                    <div>Password</div>
+                    <div id="show-password">@Model.Password</div>
+                    <button id="change-password" class="btn-base">Modify</button>
+                </div>
+                <div class="mt-3 mb-3">
+                    <div>Email address</div>
+                    <div id="show-email">@Model.EmailAddress</div>
+                    <button id="change-email" class="btn-base">Modify</button>
+                </div>
+                <div class="mt-3 mb-3">
+                    <div>About me</div>
+                    <div id="show-introduction">@Model.Description</div>
+                    <button id="change-introduction" class="btn-base">Modify</button>
+                </div>
+            </div>
+            <div class="col-4 user-img-box">
+                @if (GodchDirectories.UserData.Exist($"{Model.UserId}/photo.jpg"))
+                {
+                    <img id="show-photo" class="img-fluid" style="border:none;" src="/_GodchData/UserData/@Model.UserId/photo.jpg" />
+                }
+                else
+                {
+                    <img id="show-photo" class="img-fluid" style="border:none;" src="/_GodchData/Img/member2.png" />
+                }
+            </div>
+        </div>
+        <div class="tab-pane fade" id="friend">
+            <div class="d-flex align-items-start w-100">
+                <div class="nav flex-column nav-pills me-3 border-base border-nav-tab" id="in-friend-tab" role="tablist" aria-orientation="vertical">
+                    <button class="nav-link navTabBtn active" id="friend-verified-tab" data-bs-toggle="pill" data-bs-target="#friend-verified" type="button">Friend verified</button>
+                    <button class="nav-link navTabBtn" id="friend-waiting-tab" data-bs-toggle="pill" data-bs-target="#friend-waiting" type="button">Friend waiting</button>
+                    <button class="nav-link navTabBtn" id="friend-unconfirm-tab" data-bs-toggle="pill" data-bs-target="#friend-unconfirm" type="button">Friend unconfirm</button>
+                </div>
+                <div class="tab-content w-100" id="in-friend-tab-content">
+                    <div class="tab-pane fade show active" id="friend-verified">
+                    </div>
+                    <div class="tab-pane fade" id="friend-waiting">
+                    </div>
+                    <div class="tab-pane fade" id="friend-unconfirm">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="follower">
+        </div>
+        <div class="tab-pane fade" id="following">
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        this.addEventListener('click', function (event) {
+            profileClickEvent(event);
+        });
+    });
+</script>
+<p>
+    <a class="btn-base" href="/">Back</a>
+</p>

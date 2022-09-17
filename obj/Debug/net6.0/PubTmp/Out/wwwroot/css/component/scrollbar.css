@@ -1,0 +1,22 @@
+﻿
+/* 網頁捲軸【寬度】 */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 0px;
+}
+/* 網頁捲軸【背景】顏色 */
+::-webkit-scrollbar-track {
+    background: #fff;
+}
+/* 網頁捲軸【把手】顏色 */
+::-webkit-scrollbar-thumb {
+    background: rgba(200,200,200,0.7);
+    border-radius: 10px;
+}
+/* 網頁捲軸【滑過時】把手的顏色 */
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(220,220,220,0.7);
+}
+::-webkit-scrollbar-corner {
+    background: #fff;
+}

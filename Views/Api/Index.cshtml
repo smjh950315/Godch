@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div id="Container"></div>
+    <script src="~/js/jquery.min.js"></script>
+    <script>
+        var dataJson = {};
+        dataJson["method"] = "gdata";
+        dataJson["gidlist"] = "v";
+        $.ajax({             
+            url:'@Config.GodchApi',
+            data: JSON.stringify(dataJson),
+            contentType: "application/json;charset=utf-8",
+            type: 'POST',
+            dataType: 'JSON',
+            success:
+            function (request) {
+                console.log(request);
+            },             
+        });
+    </script>
+</body>
+</html>

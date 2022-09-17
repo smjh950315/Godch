@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div id="container">
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td><input type="text" id="fileName" /></td>
+            </tr>
+            <tr>
+                <td>File:</td>
+                <td><input type="file" id="file" /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="button" id="btnUpload" value="Upload" /></td>
+            </tr>
+            <tr>
+                <td colspan="2"><progress id="fileProgress" style="display: none"></progress></td>
+            </tr>
+        </table>
+    </div>
+    <script src="~/js/jquery.min.js"></script>
+    <script>
+        $('#container').on('click','#btnUpload',function(){
+            var formData=new FormData();
+            formData.append('filename',$('#file').val());
+            formData.append('file',$('#file')[0].files[0]);
+            $.ajax({
+                url:'@Godch.Config.GodchApi'+'/file/upload',
+                data: formData,
+                type: 'POST',
+                success:
+                function(response){
+                },
+            })
+        })
+    </script>
+</body>
+</html>

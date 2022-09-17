@@ -1,0 +1,30 @@
+﻿@model Godch.ViewModels.ViewList
+@{
+    ViewBag.Title = "Forums";
+}
+<title>Forum List</title>
+<h2>Forums</h2>
+<div id="forum-list-title" class="row" style="margin-top:0.5rem; margin-bottom:0.25rem;">
+    <div style="display:contents; justify-content:right;">
+        <a id="createForum" class="btn-base" style="margin-left:auto;" href="/Home/NewForum">
+            Create Forum
+        </a>
+    </div>
+</div>
+<div>
+    <div id="forum-list-header" class="row">
+        <div class="col-8">ForumName</div>
+        <div class="col-4">Description</div>
+    </div>
+</div>
+<div id="" class="row forum-list">
+    @foreach (var item in Model.Values)
+    {
+        <a class="forum-list-content" id="Forum_@item.Id" href="/Forum/Index?fid=@item.Id">
+            <div class="row">
+                <div class="col-8 forum-name">@item.ForumName</div>
+                <div class="col-4">@item.Description</div>                
+            </div>
+        </a>
+    }
+</div>

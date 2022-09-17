@@ -1,0 +1,33 @@
+﻿@model Godch.Models.Tag
+<p>
+    @Html.ActionLink("Back", "Index", "Home")
+</p>
+@using (Html.BeginForm("Create", "Tag",FormMethod.Post)){
+    <div class="form-horizontal">
+        <hr />
+        <div class="col">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="col align-items-center">
+                    <div class="col-12 w-50">
+                        <div class="mt-4 mb-1 ml-5p mr-5p">
+                            TagName
+                        </div>
+                        <div class="form-group mt-1 mb-4 ml-5p mr-5p">
+                            <textarea id="text_input" class="form-control" name="Description" rows="1"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-12 w-50">
+                        <div class="mt-4 mb-1 ml-5p mr-5p">
+                            Description
+                        </div>
+                        <div class="form-group mt-1 mb-4 ml-5p mr-5p">
+                            <textarea id="text_input" class="form-control" name="Description" rows="4"></textarea>
+                        </div>                    
+                    </div>
+                    <input type="submit" id="submit" value="Create" class="btn btn-default col-3 myButton text-white w-fc" />
+                </div>                
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,139 @@
+﻿@import url('lib/bootstrap.min.css');
+@import url('stylebase/align.css');
+@import url('component/base.css');
+@import url('component/button.css');
+@import url('component/chatbox.css');
+@import url('component/chatmodal.css');
+@import url('component/navitems.css');
+@import url('component/notify.css');
+@import url('component/scrollbar.css');
+@import url('component/window.css');
+@import url('component/workview.css');
+@import url('component/forum.css');
+@import url('component/account.css');
+
+body {
+    /*background: url('0.jpg');*/
+    background-color: var(--theme-bg-color)!important;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-blend-mode: soft-light;
+    color:var(--theme-text-color)!important;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+a {
+    text-decoration: none;
+}
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.body-content.forum-list{
+
+}
+/*navigator*/
+.navbar-light-x{
+    flex-wrap:nowrap;
+    justify-content:flex-start;
+    position:relative;
+    display:flex;
+    align-items:center;
+    padding-top:0.5rem;
+    padding-bottom:0.5rem;
+    box-sizing:border-box;
+}
+.navbar-dark-x {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    box-sizing: border-box;
+}
+.nav-bar-text {
+    display: inline-block;
+    position: relative;
+    font-size: 1.5rem;
+    vertical-align: middle;
+}
+.navbar-brand-left{
+    position:relative!important;
+    padding-top:0.3125rem;
+    padding-bottom:0.3125rem;
+    margin-right:1rem;
+    font-size:1.25rem;
+    text-decoration:none;
+    white-space:nowrap;
+    box-sizing:border-box;
+}
+.navbar-middle {
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%,-50%) !important;
+    position: absolute!important;
+    box-sizing:border-box;
+    display:block;
+    max-width:30%;
+}
+.nav-link {
+    display: inline-block;
+}
+.user-nav-head {
+    width: 45px;
+    height: inherit;
+    display: inline-block;
+    position: relative;
+    font-size: 1.5rem;
+    vertical-align: middle;
+    margin-left:auto;
+    vertical-align:middle!important;
+    border:1px solid black;
+}
+/*User small view*/
+.user-small-view-box {
+    width: 75px;
+    height: 75px;
+    display: inline-block;
+    margin: 1%;
+    padding: 1%;
+    border-radius: 1%;
+    border: 1px solid #505050;
+    box-shadow: 0px 0px 1px #ffffff,inset 0px 0px 1px #ffffff;
+    background-color: rgba(100,132,255,0.5);
+}
+/*Login*/
+#login-box {
+    width: 100%;
+    height: 100%;
+    width: fit-content
+}
+#login-form {
+    width: 100%;
+    padding-right: var(--bs-gutter-x,.75rem);
+    padding-left: var(--bs-gutter-x,.75rem);
+    margin-block: auto;
+    margin-top: 1em;
+}
+/*modal*/
+#modal-display-box {
+    width: 100%;
+    height: 100%;
+    width: fit-content
+}
+/*chat*/
+#chatTabContent {
+    min-height: fit-content!important;
+    width:80%!important;
+}
+.chatFrame {
+    height: 80vh;
+    width: 80% !important;    
+    display: flex;
+    left: 50% !important;
+    transform: translate(-50%,0%) !important;
+    position: absolute !important;
+    box-sizing: border-box;
+}

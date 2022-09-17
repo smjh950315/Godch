@@ -1,0 +1,42 @@
+﻿@model Godch.ViewModels.sUser;
+@{
+    ViewBag.Title = "LoginStateVerify";
+    Layout = null;
+}
+<link href="~/css/style.css" rel="stylesheet" />
+<body>
+    @if (ViewBag.LoginState == 0)
+    {
+        <div class="container">
+            <h2 class="text-danger text-center">@ServerMessage.LoginError</h2>
+        </div>
+        <div>
+            <a class="btn btn-primary" href="/Account/Login">Try again</a>
+        </div>
+        <div id="logState" style="visibility:hidden;">Fail</div>
+    }
+    else
+    {
+        <div class="container">
+            <h2 class="text-center">@ServerMessage.LoginSuccessed  @Model.Name</h2>
+        </div>
+        <div id="logState" style="visibility:hidden;">Success</div>
+        string photoName = @Model.Photo ?? "nophoto.png";
+        <div id="userPhoto" style="visibility:hidden;">@photoName</div>
+    }
+    <script src="~/js/build-in.bundle.js"></script>
+    <script src="~/js/lib/component.js"></script>
+    <script src="~/js/scripts.js"></script>
+    <script>
+        document.addEventListener('mouseover', function () {
+            var lstate = document.getElementById('logState');
+            var userPhoto = document.getElementById('userPhoto').textContent;
+            if (lstate.textContent == 'Success') {
+                var user = ['@Model.Id', '@Model.Name', String(userPhoto)];
+                sendDocMsg('loginItems', 'loginSuccess', user);
+            }
+        });
+    </script>
+</body>
+
+

@@ -1,0 +1,27 @@
+﻿@model Godch.ViewModels.vLogin
+@{
+    Layout = null;
+}
+<link href="~/css/style.css" rel="stylesheet" />
+<body style="margin:auto">
+    <div class="position-relative">
+
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post, htmlAttributes: new { @id = "login-form" }))
+        {
+                @Html.AntiForgeryToken()
+            
+            <input class="form-control mt-2 mb-2" type="text" name="Account" />
+            <input class="form-control mt-2 mb-2" type="text" name="Password" />
+            <label>
+                @Html.CheckBoxFor(x => x.RememberMe)
+                @Html.DisplayNameFor(x => x.RememberMe)
+            </label>
+            <div class="d-flex ms-2 me-2">
+                <button type="button" name="reset" class="btn btn-secondary form-control me-2">清除</button>
+                <button type="submit" name="submit" class="btn btn-primary form-control me-2">登入</button>
+            </div>
+        }
+
+    </div>
+    <script src="~/js/build-in.bundle.js"></script>
+</body>

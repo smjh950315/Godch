@@ -1,0 +1,41 @@
+﻿.wnd {
+    top: 0px;
+    left: 0px;
+    background-color: rgba(255,255,255,0.3);
+    border-radius: 3px;
+    border: 2px solid #505050;
+    width: 700px;
+    height: 500px;
+    overflow-y: auto;
+    position: absolute;
+    z-index: 3;
+    /*background-color: #0420ff*/
+}
+
+.wnd_name {
+    background-color: rgba(4,32,255,0.5);
+    text-align: left;
+    border: hidden;
+    font-weight: 700;
+    color: white;
+    cursor: move;
+    z-index: -1;
+}
+
+.wnd_content {
+    top: 50px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    border: hidden;
+    position: relative;
+    background: transparent;
+}
+
+#display {
+    top: 0px;
+    left: 0px;
+    width: 1600px;
+    height: 1200px;
+    z-index: -3;
+}

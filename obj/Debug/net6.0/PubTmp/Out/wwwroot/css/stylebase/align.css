@@ -1,0 +1,38 @@
+﻿.w-fc{
+    width:fit-content!important;
+}
+.h-fc {
+    height: fit-content!important;
+}
+.ml-5p {
+    margin-left: 5%;
+}
+.ml-10p{
+    margin-left:10%;
+}
+.mr-5p {
+    margin-right: 5%;
+}
+.mr-10p {
+    margin-right: 10%;
+}
+.wm-80{
+    max-width:80%;
+}
+.wm-90 {
+    max-width: 90%;
+}
+.wh-80 {
+    max-height: 80%;
+}
+.wh-90 {
+    max-height: 90%;
+}
+.mid {
+    display: block;
+    top:50%!important;
+    left: 50% !important;
+    transform: translate(-50%,0%) !important;
+    position: absolute !important;
+    box-sizing: border-box;
+}

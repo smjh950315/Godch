@@ -1,0 +1,79 @@
+﻿@import url('scrollbar.css');
+
+#msg-box {
+    display: flex;
+    margin: auto;
+    align-items: center;
+    flex-direction: column;
+    max-width: 75%;
+}
+#chatContainer {
+    height: auto !important;
+}
+
+#history-msg {
+    background:rgba(222,222,222,1) ;
+    min-width: 300px;
+    width: 100%;
+    height: 300px;
+    max-height: inherit !important;
+    display: inline-block;
+    border: 1px solid #ced4da;
+    box-sizing: border-box;
+    overflow: scroll;    
+}
+#GetOldMsg {
+    width: 100%;
+    display: block;
+    color: #000000;
+    text-align: center;
+    height: 2rem;
+    border: 1px solid #ced4da00;
+    font-weight: 700;
+    cursor: default;
+    position: relative;
+    background-color: rgba(200,200,200,0.2);
+}
+#GetOldMsg:hover {
+    background-image: linear-gradient(to bottom,#FFFFFF00,#FFFFFF20,#FFFFFF30,#FFFFFF20,#FFFFFF00);
+    color: #ffffff;
+    border: 1px solid #ffffff40;
+}
+#GetOldMsg > div {
+    left: 0%;
+    top: 50%;
+    position: relative;
+    transform: translate(0%,-40%);
+}
+#text_input {
+    width: 100%;
+}
+#SendMsg {
+    width: 100%;
+}
+
+
+.wrap-msg {
+    width: 100%;
+    height: fit-content;
+    display: block;
+    padding: 0.5rem;
+}
+.wrap-msg > .msg {
+    width: fit-content;
+    height: fit-content;
+    display: block;
+    border: 1px solid #ced4da;
+    border-radius: 3px 3px;
+    padding: .5rem;
+}
+.wrap-msg > .self {
+    background: rgb(119, 182, 242, 1);
+    margin-left:auto;
+    margin-right: 32px;
+}
+.wrap-msg > .else {
+    background: rgb(255, 255, 255, 1);
+    margin-left: 32px;
+    margin-right:auto;
+}
